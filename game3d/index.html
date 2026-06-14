@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D 第一人称射击</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="hud">⌨️ WASD 移动 · 🖱️ 鼠标转视角 · 🖱️ 左键射击 · Esc 解锁</div>
+
+  <div id="stats">波次 <b id="wave">1</b> · 击杀 <b id="kills">0</b></div>
+
+  <div id="crosshair"></div>
+
+  <div id="hp-wrap">
+    <div id="hp-fill"></div>
+    <span id="hp-text">100</span>
+  </div>
+
+  <div id="dmg-flash"></div>
+
+  <div id="lock-prompt">
+    <div class="lp-card">
+      <h2>第一人称射击</h2>
+      <p>点击屏幕开始</p>
+      <p>WASD 移动 · 鼠标转视角 · 左键射击</p>
+      <p class="lp-hint">击杀所有敌人进入下一波 · 按 Esc 解锁鼠标</p>
+    </div>
+  </div>
+
+  <div id="gameover">
+    <div class="lp-card">
+      <h2 style="color:#ff6b6b;">💀 你阵亡了</h2>
+      <p>坚持到第 <b id="go-wave">1</b> 波 · 击杀 <b id="go-kills">0</b> 个敌人</p>
+      <div style="margin-top:16px;"><button id="btn-restart" class="btn">重新开始</button></div>
+    </div>
+  </div>
+
+  <script src="lib/three.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

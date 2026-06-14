@@ -1,0 +1,110 @@
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #9fd3ff;
+  font-family: 'Segoe UI', 'Microsoft YaHei', system-ui, sans-serif;
+}
+
+canvas { display: block; }
+
+#hud {
+  position: fixed;
+  top: 12px;
+  left: 14px;
+  z-index: 10;
+  color: #1a2350;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- 准星 ---------- */
+#crosshair {
+  position: fixed;
+  left: 50%; top: 50%;
+  width: 22px; height: 22px;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  display: none;
+  pointer-events: none;
+}
+#crosshair::before, #crosshair::after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
+}
+#crosshair::before { left: 50%; top: 0; width: 2px; height: 100%; transform: translateX(-50%); }
+#crosshair::after  { top: 50%; left: 0; height: 2px; width: 100%; transform: translateY(-50%); }
+
+/* ---------- 指针锁定提示 ---------- */
+#lock-prompt {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 8, 20, 0.55);
+  backdrop-filter: blur(2px);
+}
+.lp-card {
+  background: rgba(20, 28, 60, 0.92);
+  border: 2px solid rgba(120, 160, 255, 0.4);
+  border-radius: 16px;
+  padding: 28px 42px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+.lp-card h2 { margin: 0 0 10px; color: #ffd93b; font-size: 26px; }
+.lp-card p { margin: 5px 0; color: #cdd8ff; }
+.lp-hint { font-size: 13px; opacity: 0.7; }
+
+/* ---------- 统计 / 血条 / 受击 ---------- */
+#stats {
+  position: fixed; top: 12px; right: 14px; z-index: 10;
+  color: #fff; background: rgba(20, 28, 60, 0.75);
+  padding: 8px 14px; border-radius: 10px; font-size: 15px;
+  pointer-events: none;
+}
+#stats b { color: #ffd93b; }
+
+#hp-wrap {
+  position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+  z-index: 10; width: 320px; height: 24px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px; overflow: hidden;
+  pointer-events: none;
+}
+#hp-fill {
+  height: 100%; width: 100%;
+  background: linear-gradient(90deg, #3ce06b, #27ae60);
+  transition: width .12s linear;
+}
+#hp-text {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+
+#dmg-flash {
+  position: fixed; inset: 0; z-index: 12; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(255,0,0,0) 40%, rgba(255,0,0,0.85) 100%);
+  opacity: 0;
+}
+
+#gameover { position: fixed; inset: 0; z-index: 25; display: none; align-items: center; justify-content: center; background: rgba(5, 8, 20, 0.7); backdrop-filter: blur(3px); }
+.lp-card .btn {
+  font-size: 17px; padding: 12px 26px; border-radius: 12px; cursor: pointer;
+  border: 2px solid rgba(120, 160, 255, 0.4); background: linear-gradient(90deg, #ffd93b, #ff9f43);
+  color: #3a2a00; font-weight: 700; font-family: inherit;
+}
+.lp-card .btn:hover { transform: translateY(-2px); }
