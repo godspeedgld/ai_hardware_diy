@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>字母流星 · 打字练习</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="game"></canvas>
+  <audio id="bgm" src="bg.mp3" loop preload="auto"></audio>
+  <button id="btn-music" title="背景音乐开关">🔊</button>
+
+  <!-- 顶部 HUD -->
+  <div id="hud" class="hidden">
+    <div class="hud-left">关卡 <b id="hud-level"></b> · <span id="hud-name"></span></div>
+    <div class="hud-center">命中率 <span id="hud-acc">100</span>%</div>
+    <div class="hud-right">进度 <span id="hud-prog">0</span>/<span id="hud-target"></span>　<span class="pause-hint">Esc 暂停</span></div>
+  </div>
+
+  <!-- 主菜单 / 关卡选择 -->
+  <div id="menu" class="overlay">
+    <div class="panel">
+      <h1>✨ 字母流星 ✨</h1>
+      <p class="subtitle">打字练习大冒险</p>
+      <button class="btn primary inf-btn" id="btn-infinite">♾️ 无限模式</button>
+      <div id="levels" class="levels"></div>
+      <p class="hint">字母像流星一样从天而降，按下键盘上对应的键把它击落吧！<br>每关命中率 ≥ <b>90%</b> 即可过关并解锁下一关 🔥<br>右下角 🔊 可开关背景音乐。</p>
+    </div>
+  </div>
+
+  <!-- 暂停 -->
+  <div id="pause" class="overlay hidden">
+    <div class="panel small">
+      <h2>⏸ 已暂停</h2>
+      <div class="btns">
+        <button class="btn primary" id="btn-resume">继续游戏</button>
+        <button class="btn" id="btn-quit">返回菜单</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 结算 -->
+  <div id="result" class="overlay hidden">
+    <div class="panel">
+      <h2 id="result-title">通关！</h2>
+      <div class="stars" id="result-stars"></div>
+      <div class="big-acc"><span id="result-acc">0</span>%</div>
+      <div class="result-stats">
+        <div>击中 <b id="result-hit">0</b></div>
+        <div>漏掉 <b id="result-miss">0</b></div>
+        <div>用时 <b id="result-time">0</b>s</div>
+      </div>
+      <div class="btns">
+        <button class="btn primary" id="btn-next">下一关 →</button>
+        <button class="btn" id="btn-retry">再玩一次</button>
+        <button class="btn" id="btn-menu">返回菜单</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

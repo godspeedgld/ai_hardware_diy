@@ -1,0 +1,169 @@
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #070b1a;
+  font-family: 'Segoe UI', 'Microsoft YaHei', system-ui, sans-serif;
+  color: #fff;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+canvas {
+  display: block;
+  position: fixed;
+  inset: 0;
+}
+
+/* ---------- 覆盖层 ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 8, 20, 0.78);
+  backdrop-filter: blur(4px);
+  z-index: 30;
+}
+.overlay.hidden, #hud.hidden { display: none; }
+
+.panel {
+  background: linear-gradient(160deg, #1a2350, #0e1430);
+  border: 2px solid rgba(120, 160, 255, 0.35);
+  border-radius: 22px;
+  padding: 34px 40px;
+  max-width: 580px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+.panel.small { max-width: 380px; padding: 28px 34px; }
+
+h1 {
+  margin: 0 0 4px;
+  font-size: 44px;
+  background: linear-gradient(90deg, #ffd93b, #6bff8c, #5ad1ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.subtitle { margin: 0 0 22px; color: #9fb4ff; font-size: 18px; }
+h2 { margin: 0 0 14px; font-size: 30px; }
+.hint { color: #8ea2d8; font-size: 14px; margin-top: 18px; line-height: 1.7; }
+.hint b { color: #ffd93b; }
+
+/* ---------- 关卡按钮 ---------- */
+.levels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.inf-btn { width: 100%; margin: 0 0 16px; font-size: 20px; padding: 14px; }
+.level-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  padding: 14px 6px;
+  border-radius: 14px;
+  border: 2px solid rgba(120, 160, 255, 0.4);
+  background: linear-gradient(160deg, #2a3578, #1a2350);
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform .08s, box-shadow .2s, border-color .2s;
+}
+.level-btn:hover:not(.locked) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(90, 140, 255, 0.4);
+  border-color: #ffd93b;
+}
+.level-btn.locked {
+  opacity: .4;
+  cursor: not-allowed;
+  filter: grayscale(.6);
+}
+.lv-num { font-size: 24px; font-weight: 800; color: #ffd93b; }
+.lv-name { font-size: 13px; color: #cdd8ff; }
+.lv-best { font-size: 11px; color: #8ea2d8; }
+
+/* ---------- 按钮 ---------- */
+.btn {
+  font-family: inherit;
+  font-size: 17px;
+  padding: 12px 22px;
+  border-radius: 12px;
+  border: 2px solid rgba(120, 160, 255, 0.4);
+  background: #1a2350;
+  color: #fff;
+  cursor: pointer;
+  margin: 6px;
+  transition: transform .08s, background .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn.primary {
+  background: linear-gradient(90deg, #ffd93b, #ff9f43);
+  color: #3a2a00;
+  border-color: transparent;
+  font-weight: 700;
+}
+.btns { margin-top: 18px; display: flex; flex-wrap: wrap; justify-content: center; }
+
+/* ---------- 结算 ---------- */
+.stars { font-size: 42px; margin: 6px 0 4px; letter-spacing: 6px; min-height: 44px; }
+.big-acc { font-size: 66px; font-weight: 800; color: #ffd93b; line-height: 1; margin: 6px 0; }
+.result-stats {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin: 14px 0 4px;
+  color: #cdd8ff;
+  font-size: 16px;
+}
+.result-stats b { color: #fff; font-size: 20px; }
+
+/* ---------- HUD ---------- */
+#hud {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 22px;
+  background: linear-gradient(180deg, rgba(8, 12, 30, 0.9), rgba(8, 12, 30, 0));
+  z-index: 20;
+  font-size: 18px;
+  pointer-events: none;
+}
+.hud-center { font-weight: 700; color: #ffd93b; font-size: 22px; }
+.hud-left, .hud-right { color: #cdd8ff; }
+.hud-left b { color: #ffd93b; }
+.pause-hint { opacity: .6; font-size: 14px; }
+
+/* ---------- 背景音乐开关 ---------- */
+#btn-music {
+  position: fixed;
+  right: 16px; bottom: 16px;
+  z-index: 40;
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(120, 160, 255, 0.4);
+  background: rgba(20, 28, 60, 0.85);
+  color: #ffd93b;
+  font-size: 22px;
+  cursor: pointer;
+  line-height: 1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: transform .08s;
+}
+#btn-music:hover { transform: scale(1.08); }
+
+@media (max-width: 600px) {
+  .levels { grid-template-columns: repeat(3, 1fr); }
+  h1 { font-size: 34px; }
+  .big-acc { font-size: 52px; }
+  #hud { font-size: 15px; }
+}
