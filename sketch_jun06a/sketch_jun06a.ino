@@ -3,7 +3,7 @@ int led_pin = 12;
 
 void setup() {
   // put your setup code here, to run once            
- pinMode(led_pin, OUTPUT);
+  pinMode(led_pin, OUTPUT);
   digitalWrite(led_pin, HIGH);
 }
 
